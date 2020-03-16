@@ -86,7 +86,7 @@ class App extends Component{
       }
     render(){
       if (this.state.isLoading) {
-            return <SplashScreen />;
+            return true;
           }
       return(
         <NavigationContainer>
@@ -100,7 +100,7 @@ class App extends Component{
              
               
              
-              <Stack.Screen name="Home" component={HomeScreen} options={{title:'Home'}}/> 
+              {/* <Stack.Screen name="Home" component={HomeScreen} options={{title:'Home'}}/>  */}
             </Stack.Navigator>
           </NavigationContainer>
      

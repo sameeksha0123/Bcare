@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet,Button } from 'react-native';
-import Colors from '../constants/color';
+// import Colors from '../constants/color';
 
 const PrimaryButton = props => {
     return (
@@ -16,8 +16,8 @@ const styles = StyleSheet.create({
       marginBottom:10,
       borderRadius:10,
       textAlign:"center",
-      backgroundColor:Colors.dark_primary_color,
-      color:Colors.white_color
+    //   backgroundColor:Colors.dark_primary_color,
+    //   color:Colors.white_color
       },
 })
 export default PrimaryButton;

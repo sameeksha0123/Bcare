@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Colors from '../../constants/color';
+// import Colors from '../../constants/color';
 import PrimaryButton from '../../components/button';
 import Input from '../../components/inputField';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
       
     },linkText:{
       fontSize:16,
-      color:Colors.dark_primary_color,
+    //   color:Colors.dark_primary_color,
       fontStyle:'italic',
     }
      
