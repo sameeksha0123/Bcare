@@ -5,17 +5,17 @@ import { StyleSheet,Button } from 'react-native';
 const PrimaryButton = props => {
     return (
          <Button {...props}
-      style={styles.inputField}
+      style={[styles.button_primary,props.style,]}
       onPress= {()=>props.onBtnPress()}
        />
       )
 }
 const styles = StyleSheet.create({
-    inputField:{
-        width:'80%',
+    button_primary:{
       marginBottom:10,
       borderRadius:10,
-      textAlign:"center",
+      width:'100%'
+      // textAlign:"center",
     //   backgroundColor:Colors.dark_primary_color,
     //   color:Colors.white_color
       },

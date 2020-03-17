@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     //   color:Colors.primary_text_color,
       borderWidth:1,
       textAlign:'left',
-      borderRadius:10,
+      borderRadius:20,
       fontSize:20,
       },
 })

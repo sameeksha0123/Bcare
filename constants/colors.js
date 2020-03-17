@@ -6,5 +6,6 @@ export default {
     green:"#d7e7a9",
     green_2:"#b5ddd1",
     blue:"#B2D9EA",
+    blue_dark:"#2ab0eb",
     blue_2:"#84b4c8",
 }

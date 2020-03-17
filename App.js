@@ -23,7 +23,7 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-
+import SignAs from './containers/Login/SignAs'
 import RegisterPage from './containers/Register/RegisterPage';
 import LoginPage from './containers/Login/LoginPage';
 import { NavigationContainer } from '@react-navigation/native';
@@ -37,7 +37,7 @@ class App extends Component{
         super(props);
       
         this.state = { 
-          isLoading: true,
+         
         isLogged:false, }
       }
       
@@ -77,26 +77,20 @@ class App extends Component{
           catch(e){
             console.log("user not found")
           }
-        if (data !== null) {
-          this.setState({ isLoading: false });
-          
-        }
-        const data = await this.performTimeConsumingTask();
   
       }
     render(){
-      if (this.state.isLoading) {
-            return true;
-          }
+     
       return(
         <NavigationContainer>
        <Stack.Navigator>
-         {this.state.isLoading ? 
+         <Stack.Screen name="SignAs" component={SignAs} options={{headerShown:false}}/>
+        
               <Stack.Screen name="Register" component={RegisterPage} 
-              options={{headerShown:false}}/> :
+              options={{headerShown:false}}/> 
               <Stack.Screen name="Login" component={LoginPage} 
               options={{headerShown:false}}/> 
-         }
+         
              
               
              

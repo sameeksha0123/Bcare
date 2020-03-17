@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View ,Button ,Alert} from 'react-native';
-// import Colors from '../../constants/colors';
+import Colors from '../../constants/colors';
 import PrimaryButton from '../../components/button';
 import Input from '../../components/inputField';
 import firebase  from '../../Firebase'; 
@@ -14,17 +14,17 @@ import { db ,auth} from '../../Firebase'
 
 const LoginPage = (props) =>{
  
-    auth.onAuthStateChanged(user=>{
-      if(user){
-        console.log("user ---->",user)
-      }
-      else{
-        console.log("user is logged out")
-      }
-    })
+    // auth.onAuthStateChanged(user=>{
+    //   if(user){
+    //     console.log("user ---->",user)
+    //   }
+    //   else{
+    //     console.log("user is logged out")
+    //   }
+    // })
     const [password, setPassword] = useState();
     const [email, setEmail] = useState('');
-    const [userDetail,setUserDetail] = useState([])
+    // const [userDetail,setUserDetail] = useState([])
     
     // GoogleSignin.configure({
     //   scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
@@ -39,27 +39,27 @@ const LoginPage = (props) =>{
     const getUserId = async ()=>{
       console.log("asyncStore...........DidMount")
       
-      try {
-        const username = await AsyncStorage.getItem('@user_name') || 'none';
-        console.log("username in login page",username)
-        const object = await AsyncStorage.getAllKeys((err,keys)=>{
-          AsyncStorage.multiGet(keys, (err, stores) => {
-            stores.map((result, i, store) => {
-              // get at each store's key/value so you can work with it
-              let key = store[i][0];
-              let value = store[i][1];
-              console.log("--",key,':',value)
-            });
-          });
-        })
-        var i;
-        console.log("All key..........",object)
-        console.log('useDetail:', userDetail.map(i))
-      } catch (error) {
-        // Error retrieving data
-        console.log(error.message);
-      }
-      return username;
+      // try {
+      //   // const username = await AsyncStorage.getItem('@user_name') || 'none';
+      //   // console.log("username in login page",username)
+      //   const object = await AsyncStorage.getAllKeys((err,keys)=>{
+      //     AsyncStorage.multiGet(keys, (err, stores) => {
+      //       stores.map((result, i, store) => {
+      //         // get at each store's key/value so you can work with it
+      //         let key = store[i][0];
+      //         let value = store[i][1];
+      //         console.log("--",key,':',value)
+      //       });
+      //     });
+      //   })
+      //   var i;
+      //   console.log("All key..........",object)
+      //   console.log('useDetail:', userDetail.map(i))
+      // } catch (error) {
+      //   // Error retrieving data
+      //   console.log(error.message);
+      // }
+      // // return username;
     
       }
       useEffect(()=>{getUserId()},[])
@@ -73,20 +73,20 @@ const LoginPage = (props) =>{
       }
       const showLogged= ()=>{
         console.log('thiiiis', this)
-        auth.createUserWithEmailAndPassword(email,password)
-        .then(cred=> console.log("credentials", cred.user))
-        .catch(err => console.log('error', err))
+        // auth.createUserWithEmailAndPassword(email,password)
+        // .then(cred=> console.log("credentials", cred.user))
+        // .catch(err => console.log('error', err))
         // storeData(email,password)
         // setUserList(userList.push({
         //   userEmail: email,
         //   userPassword: password
         // }))
-        db.ref('/items').push({
-          userName: name,
-          userPassword: password
-        }).then(data=>{
-          console.log("data", data)
-        }).catch(error=>console.log("error",error));
+        // db.ref('/items').push({
+        //   userName: name,
+        //   userPassword: password
+        // }).then(data=>{
+        //   console.log("data", data)
+        // }).catch(error=>console.log("error",error));
         
         AsyncStorage.getAllKeys((err,keys)=>{
           AsyncStorage.multiGet(keys, (err, stores) => {
@@ -116,7 +116,8 @@ const LoginPage = (props) =>{
     }
     return (
         <View style={styles.screen}>
-   
+          <View style={styles.pinkView}></View>
+   <View style={styles.loginBlock}>
    <Input 
       placeholder="Email address"
       onChangeText={emailHandler} 
@@ -133,12 +134,18 @@ const LoginPage = (props) =>{
       secureTextEntry = {true}
       textContentType='password'/>
 
-<PrimaryButton title="LOG IN" 
-      onBtnPress={()=>showLogged()}/>
+{/* <PrimaryButton title="LOG IN" style={styles.btn}
+      onBtnPress={()=>showLogged()}/> */}
+      <Button {...props} title="LOG IN"
+      style={styles.btn}
+      onPress= {()=>showLogged()}
+       />
      
      <Text  style={styles.linkText}
      onPress={()=>navigation.navigate('ResetPassword')}>
        Forget Password?</Text>
+   </View>
+   
  
        {/* <GoogleSigninButton
     style={{ width: 192, height: 48 }}
@@ -154,10 +161,36 @@ const LoginPage = (props) =>{
 const styles = StyleSheet.create({
     screen:{
       flex:1,
+      
       alignItems:'center',
       justifyContent:'center',
+      // backgroundColor:Colors.peach
       
-    },linkText:{
+    },pinkView:{
+      height:'50%',
+      position:'relative' ,
+      width:'100%',borderWidth:1,
+      flex:1,
+      backgroundColor:Colors.peach
+    },loginBlock:{
+      borderWidth:2,
+      width:'90%',
+      flex:2,
+      justifyContent:'flex-start',
+      alignItems:'center',
+      zIndex:100,
+      backgroundColor:Colors.peach,
+      borderTopLeftRadius:10,
+      borderTopRightRadius:10,
+      shadowOffset:{  width: 10,  height: 10,  },
+shadowColor: 'black',
+shadowOpacity: 1.0,
+
+      // boxShadow:5
+    },btn:{
+      width:"100%",
+    },
+    linkText:{
       fontSize:16,
       // color:Colors.dark_primary_color,
       fontStyle:'italic',
