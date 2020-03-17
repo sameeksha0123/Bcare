@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react';
-import { StyleSheet, Text, View ,Button ,Alert} from 'react-native';
+import { StyleSheet, Text, View ,Button ,Alert,Dimensions} from 'react-native';
 import Colors from '../../constants/colors';
+import Avatar from '../../components/avatar';
 import PrimaryButton from '../../components/button';
 import Input from '../../components/inputField';
 import firebase  from '../../Firebase'; 
@@ -11,6 +12,11 @@ import { db ,auth} from '../../Firebase'
 //   GoogleSigninButton,
 //   statusCodes,
 // } from '@react-native-community/google-signin';
+
+const window = Dimensions.get("window");
+// const screen = Dimensions.get("screen"); 
+const height = window.height;
+const width = window.width;
 
 const LoginPage = (props) =>{
  
@@ -38,7 +44,7 @@ const LoginPage = (props) =>{
     // });
     const getUserId = async ()=>{
       console.log("asyncStore...........DidMount")
-      
+      console.log("dimensions", window , height, width)
       // try {
       //   // const username = await AsyncStorage.getItem('@user_name') || 'none';
       //   // console.log("username in login page",username)
@@ -116,9 +122,11 @@ const LoginPage = (props) =>{
     }
     return (
         <View style={styles.screen}>
-          <View style={styles.pinkView}></View>
-   <View style={styles.loginBlock}>
+
+   {/* <View style={styles.loginBlock}> */}
+   <View style={styles.avatarContainer} ><Avatar/></View>
    <Input 
+      style={styles.input}
       placeholder="Email address"
       onChangeText={emailHandler} 
       value={email}
@@ -127,6 +135,7 @@ const LoginPage = (props) =>{
       keyboardType='email-address'/>
 
 <Input 
+      style={styles.input}
       placeholder="password"
       onChangeText={pwdHandler} 
       value={password}
@@ -134,17 +143,16 @@ const LoginPage = (props) =>{
       secureTextEntry = {true}
       textContentType='password'/>
 
-{/* <PrimaryButton title="LOG IN" style={styles.btn}
-      onBtnPress={()=>showLogged()}/> */}
-      <Button {...props} title="LOG IN"
-      style={styles.btn}
-      onPress= {()=>showLogged()}
-       />
-     
+<PrimaryButton 
+      title="LOG IN" 
+      // style={styles.btn} 
+      color={Colors.peach}
+      onBtnPress={()=>showLogged()}/>
+  
      <Text  style={styles.linkText}
      onPress={()=>navigation.navigate('ResetPassword')}>
        Forget Password?</Text>
-   </View>
+   {/* </View> */}
    
  
        {/* <GoogleSigninButton
@@ -161,34 +169,30 @@ const LoginPage = (props) =>{
 const styles = StyleSheet.create({
     screen:{
       flex:1,
-      
       alignItems:'center',
       justifyContent:'center',
       // backgroundColor:Colors.peach
-      
-    },pinkView:{
-      height:'50%',
-      position:'relative' ,
-      width:'100%',borderWidth:1,
-      flex:1,
-      backgroundColor:Colors.peach
-    },loginBlock:{
+    },
+    avatarContainer:{
+      borderColor:Colors.peach,
       borderWidth:2,
-      width:'90%',
-      flex:2,
-      justifyContent:'flex-start',
-      alignItems:'center',
-      zIndex:100,
-      backgroundColor:Colors.peach,
-      borderTopLeftRadius:10,
-      borderTopRightRadius:10,
-      shadowOffset:{  width: 10,  height: 10,  },
-shadowColor: 'black',
-shadowOpacity: 1.0,
-
-      // boxShadow:5
-    },btn:{
-      width:"100%",
+      height:(height*0.3),
+      width:(height*0.3),
+      borderRadius:(height*0.3)/2,
+      marginBottom:30,
+      zIndex:1,
+      overflow:'hidden'
+    },
+    input:{
+    borderColor:Colors.peach,
+    marginBottom:20,
+    },
+    btn:{
+      
+      fontSize:20,
+      textAlign:'center',
+      color:'white',
+      marginBottom:10,
     },
     linkText:{
       fontSize:16,

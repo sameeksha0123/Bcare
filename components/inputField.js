@@ -5,20 +5,20 @@ import { StyleSheet, View, TextInput, } from 'react-native';
 const Input = props => {
     return (
          <TextInput {...props}
-      style={styles.inputField}
+      style={[styles.inputField,props.style]}
       
        />
       )
 }
 const styles = StyleSheet.create({
     inputField:{
-      margin:5,
+      marginBottom:10,
       width:'80%',
     //   borderColor:Colors.dark_primary_color,
     //   color:Colors.primary_text_color,
-      borderWidth:1,
+      borderWidth:2,
       textAlign:'left',
-      borderRadius:20,
+      borderRadius:30,
       fontSize:20,
       },
 })

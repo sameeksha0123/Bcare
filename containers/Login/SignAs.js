@@ -19,7 +19,7 @@ const SignAs = (props)=>{
 
     return(
         <View style={styles.container}>
-            <Text style={[styles.text,styles.textHeader]}>Sign As </Text>
+            <Text style={[styles.text,styles.textHeader]}>SignIn As </Text>
             <View style={styles.SignInblocks}>
                 <TouchableOpacity  activeOpacity={0.3} style={styles.SignAs} 
                 onPress={()=>{ParentSignIn()}}
